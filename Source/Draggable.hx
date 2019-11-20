@@ -16,6 +16,8 @@ class Draggable extends Sprite {
 	public function mouseDown(e:MouseEvent) {
 		trace("mouseDown");
 
+		parent.addChild(this);
+		
         dragging = true;
 		startDrag();
 	}

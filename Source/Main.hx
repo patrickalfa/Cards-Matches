@@ -2,6 +2,7 @@ package;
 
 import openfl.display.Sprite;
 import openfl.events.Event;
+import openfl.events.KeyboardEvent;
 import openfl.Lib;
 import Hand;
 import Utils;
@@ -17,22 +18,35 @@ class Main extends Sprite {
 	public function new() {
 		super();
 
-		stage.color = Utils.PALETTE[0];
-
 		_hand = new Hand();
 		_hand.x = stage.stageWidth / 2;
 		_hand.y = stage.stageHeight - 50;
 		addChild(_hand);
 
-		addEventListener(Event.ENTER_FRAME, update);
+		stage.color = Utils.PALETTE[0];
+
+		stage.addEventListener(Event.ENTER_FRAME, enterFrame);
+		stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
+
 		_prevFrame = Lib.getTimer();
 	}
 
-	private function update(e:Event) {
+	private function enterFrame(e:Event) {
 		_curFrame = Lib.getTimer();
 		_deltaTime = (_curFrame - _prevFrame) * 0.001;
 		_prevFrame = _curFrame;
 
 		_hand.update(_deltaTime);
+	}
+
+	private function keyDown(e:KeyboardEvent) {
+		trace("keyDown: " + e.keyCode);
+
+		if (e.keyCode == 68) {
+			CardsManager.instance.Draw();
+		}
+		if (e.keyCode == 82) {
+			CardsManager.instance.Shuffle();
+		}
 	}
 }

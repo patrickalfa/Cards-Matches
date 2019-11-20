@@ -8,6 +8,7 @@
 	
 	<haxelib name="openfl" />
 	<haxelib name="random" />
+	<haxelib name="deepstate" />
 	
 	<assets path="Assets" rename="assets" />
 	

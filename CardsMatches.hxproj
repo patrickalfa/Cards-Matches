@@ -24,6 +24,7 @@
   <!-- haxelib libraries -->
   <haxelib>
     <library name="random" />
+    <library name="deepstate" />
     <!-- example: <library name="..." /> -->
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->

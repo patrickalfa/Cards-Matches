@@ -4,8 +4,9 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.KeyboardEvent;
 import openfl.Lib;
-import Hand;
-import Utils;
+import objects.Hand;
+import utils.Utils;
+import managers.CardsManager;
 
 class Main extends Sprite {
 	private var _hand:Hand;

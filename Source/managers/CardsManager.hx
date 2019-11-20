@@ -1,9 +1,9 @@
-package;
+package managers;
 
-import GameManager;
-import Card;
-import Utils;
 import Random;
+import managers.GameManager;
+import utils.Utils;
+import objects.Card;
 
 class CardsManager {
     public static var instance(default, null):CardsManager = new CardsManager();
@@ -14,7 +14,7 @@ class CardsManager {
 
     private function new() {
         for (i in 0...20) {
-            reserve.push(new Card());
+            reserve.push(new Card(Random.int(0,2)));
         }
     }
 

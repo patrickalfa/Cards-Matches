@@ -1,7 +1,7 @@
-package;
+package managers;
 
-import CardsManager;
-import Card;
+import managers.CardsManager;
+import objects.Card;
 
 enum GAME_STATE {
 	DRAWING;

@@ -1,8 +1,9 @@
-package;
+package objects;
 
 import openfl.display.Sprite;
-import CardsManager;
-import Card;
+import managers.CardsManager;
+import utils.Utils;
+import objects.Card;
 
 class Hand extends Sprite {
 	public function new() {

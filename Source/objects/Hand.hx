@@ -3,19 +3,8 @@ package objects;
 import openfl.display.Sprite;
 import managers.CardsManager;
 import utils.Utils;
-import objects.Card;
 
 class Hand extends Sprite {
-	public function new() {
-		super();
-		
-		for (card in CardsManager.instance.reserve) {
-			card.x = 0;
-			card.y = 200;
-			addChild(card);
-		}
-	}
-
     public function update(deltaTime:Float) {
 		var dist = Utils.CARD_WIDTH + Utils.HAND_SPACING;
 		var hand = CardsManager.instance.hand;

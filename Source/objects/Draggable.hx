@@ -13,7 +13,7 @@ class Draggable extends Sprite {
 		addEventListener(MouseEvent.MOUSE_UP, mouseUp);
 	}
 
-	public function mouseDown(e:MouseEvent) {
+	private function mouseDown(e:MouseEvent) {
 		trace("mouseDown");
 
 		parent.addChild(this);
@@ -22,7 +22,7 @@ class Draggable extends Sprite {
 		startDrag();
 	}
 
-	public function mouseUp(e:MouseEvent) {
+	private function mouseUp(e:MouseEvent) {
 		trace("mouseUp");
 
 		dragging = false;

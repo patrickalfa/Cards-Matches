@@ -1,5 +1,8 @@
 package utils;
 
+import openfl.display.DisplayObject;
+import openfl.geom.Point;
+
 class Utils {
 	public static var PALETTE:Array<Int> = [
         0xffa372,   //#ffa372
@@ -15,5 +18,13 @@ class Utils {
 
     public static function Lerp(a:Float, b:Float, t:Float) {
         return a + (b - a) * t;
+    }
+
+    public static function LocalToLocal(child:DisplayObject, localA:DisplayObject, localB:DisplayObject) {
+        var oldPos = new Point(child.x, child.y);
+        var globalPos = localA.localToGlobal(oldPos);
+        var newPos = localB.globalToLocal(globalPos);
+        child.x = newPos.x;
+        child.y = newPos.y;
     }
 }

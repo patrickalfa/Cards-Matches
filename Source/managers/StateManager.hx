@@ -22,15 +22,15 @@ class StateManager {
 	private function new() {
 		state = new DeepState<State>({
             reserve: [
-                { id: 0 },
-                { id: 1 },
-                { id: 2 },
-                { id: 0 },
-                { id: 1 },
-                { id: 2 },
-                { id: 0 },
-                { id: 1 },
-                { id: 2 },
+                { type: 0 },
+                { type: 1 },
+                { type: 2 },
+                { type: 0 },
+                { type: 1 },
+                { type: 2 },
+                { type: 0 },
+                { type: 1 },
+                { type: 2 },
             ],
             hand: [],
             discard: []

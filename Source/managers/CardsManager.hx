@@ -1,65 +1,90 @@
 package managers;
 
 import Random;
+import openfl.geom.Point;
 import managers.GameManager;
 import utils.Utils;
-import objects.Card;
+import objects.*;
 
 class CardsManager {
-    public static var instance(default, null):CardsManager = new CardsManager();
+	public static var instance(default, null):CardsManager = new CardsManager();
 
-    public var reserve:Array<Card> = [];
-    public var discard:Array<Card> = [];
-    public var hand:Array<Card> = [];
+	public var reserve:Array<Card> = [];
+	public var discard:Array<Card> = [];
+	public var hand:Array<Card> = [];
 
-    private function new() {
-        for (i in 0...20) {
-            reserve.push(new Card(Random.int(0,2)));
-        }
-    }
+	private var _hand:Hand;
+	private var _reserve:Reserve;
+	private var _discard:Discard;
 
-    // Draws a card from the reserve pile to the hand of the player
-    public function Draw() {
-        if (reserve.length == 0) {
-            reserve = discard;
-            discard = [];
+	private function new() {
+	}
+
+    /// Setup piles references
+	public function SetupPiles(_hand:Hand, _reserve:Reserve, _discard:Discard) {
+		this._hand = _hand;
+		this._reserve = _reserve;
+		this._discard = _discard;
+
+		for (i in 0...20) {
+			reserve.push(new Card(Random.int(0, 2)));
+            _reserve.addChild(reserve[i]);
+		}
+	}
+
+	/// Draws a card from the reserve pile to the hand of the player
+	public function Draw() {
+		if (reserve.length == 0) {
+			RefillReserve();
             Shuffle();
-        }
+		}
 
-        if (hand.length < Utils.HAND_SIZE)
-        {
-            //GameManager.instance.state = GAME_STATE.DRAWING;
-            //StopCoroutine("WaitForDrawToComplete");
-            //StartCoroutine("WaitForDrawToComplete");
+		if (hand.length < Utils.HAND_SIZE) {
+			var card = reserve.shift();
 
-            hand.push(reserve[0]);
-            reserve.shift();
-        }
-    }
+			Utils.LocalToLocal(card, _reserve, _hand);
+			
+			hand.push(card);
+			_hand.addChild(card);
+		}
+	}
 
-    /// Discard a card from the hand of the player, moving it to the discard pile 
-    public function Discard(card:Card)
-    {
-        hand.remove(card);
-        discard.push(card);
-    }
+	/// Discard a card from the hand of the player, moving it to the discard pile
+	public function Discard(card:Card) {
+		hand.remove(card);
 
-    /// Shuffles the reserve/draw pile of the player
-    public function Shuffle() {
-        hand = Random.shuffle(hand);
-    }
+		Utils.LocalToLocal(card, _hand, _discard);
 
-    /// Draw an entire handful of cards
-    public function DrawHand()
-    {
-        while(hand.length < Utils.HAND_SIZE)
-            Draw();
-    }
+		discard.push(card);
+		_discard.addChild(card);
+	}
 
-    /// Discard the entire hand
-    public function DiscardHand()
-    {
-        while (hand.length > 0)
-            Discard(hand[0]);
-    }
+	/// Shuffles the reserve pile of the player
+	public function Shuffle() {
+		hand = Random.shuffle(hand);
+	}
+
+	/// Draw an entire handful of cards
+	public function DrawHand() {
+		while (hand.length < Utils.HAND_SIZE)
+			Draw();
+	}
+
+	/// Discard the entire hand
+	public function DiscardHand() {
+		while (hand.length > 0)
+			Discard(hand[0]);
+	}
+
+	/// Refills the reserve pile
+	public function RefillReserve() {
+		reserve = discard;
+        discard = [];
+
+        for (card in reserve) {
+			Utils.LocalToLocal(card, _discard, _reserve);
+			
+            _reserve.addChild(card);
+		}
+	}
 }

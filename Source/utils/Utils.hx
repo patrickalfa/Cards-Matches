@@ -3,6 +3,13 @@ package utils;
 import openfl.display.DisplayObject;
 import openfl.geom.Point;
 
+enum CARD_STATE {
+	HAND;
+	BOARD;
+	RESERVE;
+	DISCARDED;
+}
+
 class Utils {
 	public static var PALETTE:Array<Int> = [
         0xffa372,   //#ffa372

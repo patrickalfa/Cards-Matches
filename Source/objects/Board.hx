@@ -12,6 +12,7 @@ class Board extends Sprite {
 		for (i in 0...count) {
             if (board[i] != null && !board[i].dragging) {
 				var newX = (dist * count * .5) - (dist * (count - i - .5));
+                
                 board[i].x = Utils.Lerp(board[i].x, newX, deltaTime * 5);
                 board[i].y = Utils.Lerp(board[i].y, 0, deltaTime * 5);
                 

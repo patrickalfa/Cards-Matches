@@ -11,7 +11,7 @@ class Hand extends Sprite {
 		var count = hand.length;
 		for (i in 0...count) {
 			if (!hand[i].dragging) {
-				var newX = -(dist * count * .5) + (dist * (count - i - .5));
+				var newX = (dist * count * .5) - (dist * (count - i - .5));
 				hand[i].x = Utils.Lerp(hand[i].x, newX, deltaTime * 5);
 				hand[i].y = Utils.Lerp(hand[i].y, 0, deltaTime * 5);
 			}

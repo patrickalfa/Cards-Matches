@@ -1,8 +1,6 @@
 package managers;
 
 import Random;
-import openfl.geom.Point;
-import managers.GameManager;
 import utils.Utils;
 import objects.*;
 
@@ -12,24 +10,31 @@ class CardsManager {
 	public var reserve:Array<Card> = [];
 	public var discard:Array<Card> = [];
 	public var hand:Array<Card> = [];
+	public var board:Array<Card> = [];
 
 	private var _hand:Hand;
 	private var _reserve:Reserve;
 	private var _discard:Discard;
+	private var _board:Board;
 
 	private function new() {
 	}
 
     /// Setup piles references
-	public function SetupPiles(_hand:Hand, _reserve:Reserve, _discard:Discard) {
-		this._hand = _hand;
-		this._reserve = _reserve;
-		this._discard = _discard;
+	public function SetupPiles(hand:Hand, reserve:Reserve, discard:Discard, board:Board) {
+		this._hand = hand;
+		this._reserve = reserve;
+		this._discard = discard;
+		this._board = board;
 
+		// DEBUG - fill reserve pile
 		for (i in 0...20) {
-			reserve.push(new Card(Random.int(0, 2)));
-            _reserve.addChild(reserve[i]);
+			this.reserve.push(new Card(Random.int(0, 2)));
+            this._reserve.addChild(this.reserve[i]);
 		}
+
+		// DEBUG - initialize board array
+		this.board = [null, null, null, null, null];
 	}
 
 	/// Draws a card from the reserve pile to the hand of the player
@@ -83,8 +88,21 @@ class CardsManager {
 
         for (card in reserve) {
 			Utils.LocalToLocal(card, _discard, _reserve);
-			
+
             _reserve.addChild(card);
 		}
+	}
+
+	/// Move a card from the player's hand to the board
+	public function AddToBoard(card:Card, id:Int) {
+		if (board[id] != null)
+			return;
+		
+		hand.remove(card);
+
+		Utils.LocalToLocal(card, _hand, _board);
+
+		board[id] = card;
+		_board.addChild(card);
 	}
 }

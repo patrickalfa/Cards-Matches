@@ -12,6 +12,7 @@ class Main extends Sprite {
 	private var _hand:Hand;
 	private var _reserve:Reserve;
 	private var _discard:Discard;
+	private var _board:Board;
 
 	// DELTA TIME
 	private var _deltaTime:Float = 0;
@@ -24,17 +25,23 @@ class Main extends Sprite {
 		_hand = new Hand();
 		_hand.x = stage.stageWidth / 2;
 		_hand.y = stage.stageHeight - 50;
-		addChild(_hand);
 
 		_reserve = new Reserve();
 		_reserve.x = stage.stageWidth / 2;
-		_reserve.y = stage.stageHeight + 500;
-		addChild(_reserve);
+		_reserve.y = stage.stageHeight + 200;
 
 		_discard = new Discard();
 		_discard.x = stage.stageWidth / 2;
-		_discard.y = stage.stageHeight + 500;
+		_discard.y = stage.stageHeight + 200;
+
+		_board = new Board();
+		_board.x = stage.stageWidth / 2;
+		_board.y = stage.stageHeight - 200;
+
+		addChild(_reserve);
 		addChild(_discard);
+		addChild(_board);
+		addChild(_hand);
 
 		stage.color = Utils.PALETTE[0];
 
@@ -43,7 +50,7 @@ class Main extends Sprite {
 
 		_prevFrame = Lib.getTimer();
 
-		CardsManager.instance.SetupPiles(_hand, _reserve, _discard);
+		CardsManager.instance.SetupPiles(_hand, _reserve, _discard, _board);
 	}
 
 	private function enterFrame(e:Event) {
@@ -54,6 +61,7 @@ class Main extends Sprite {
 		_hand.update(_deltaTime);
 		_reserve.update(_deltaTime);
 		_discard.update(_deltaTime);
+		_board.update(_deltaTime);
 	}
 
 	private function keyDown(e:KeyboardEvent) {

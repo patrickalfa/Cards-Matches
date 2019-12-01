@@ -5,14 +5,20 @@ import openfl.events.Event;
 import openfl.events.KeyboardEvent;
 import openfl.Lib;
 import objects.*;
+import managers.*;
 import utils.Utils;
-import managers.CardsManager;
 
-class Main extends Sprite {	
+class Main extends Sprite {
+	// CARDS
 	private var _hand:Hand;
-	private var _reserve:Reserve;
-	private var _discard:Discard;
+	private var _reserve:Pile;
+	private var _discard:Pile;
 	private var _board:Board;
+
+	// MISSION
+	private var _mission:Mission;
+	private var _goalsReserve:Pile;
+	private var _goalsDiscard:Pile;
 
 	// DELTA TIME
 	private var _deltaTime:Float = 0;
@@ -22,15 +28,17 @@ class Main extends Sprite {
 	public function new() {
 		super();
 
+		// CARDS
+
 		_hand = new Hand();
 		_hand.x = stage.stageWidth / 2;
 		_hand.y = stage.stageHeight - 50;
 
-		_reserve = new Reserve();
+		_reserve = new Pile(cast(CardsManager.instance.reserve));
 		_reserve.x = stage.stageWidth / 2;
 		_reserve.y = stage.stageHeight + 200;
 
-		_discard = new Discard();
+		_discard = new Pile(cast(CardsManager.instance.discard));
 		_discard.x = stage.stageWidth / 2;
 		_discard.y = stage.stageHeight + 200;
 
@@ -43,6 +51,26 @@ class Main extends Sprite {
 		addChild(_board);
 		addChild(_hand);
 
+		// MISSION
+
+		_mission = new Mission();
+		_mission.x = stage.stageWidth / 2;
+		_mission.y = stage.stageHeight / 2 - 100;
+
+		_goalsReserve = new Pile(cast(GoalsManager.instance.reserve));
+		_goalsReserve.x = -200;
+		_goalsReserve.y = stage.stageHeight / 2 - 100;
+
+		_goalsDiscard = new Pile(cast(GoalsManager.instance.reserve));
+		_goalsDiscard.x = stage.stageWidth + 200;
+		_goalsDiscard.y = stage.stageHeight / 2 - 100;
+
+		addChild(_goalsReserve);
+		addChild(_goalsDiscard);
+		addChild(_mission);
+
+		//
+
 		stage.color = Utils.PALETTE[0];
 
 		stage.addEventListener(Event.ENTER_FRAME, enterFrame);
@@ -51,6 +79,7 @@ class Main extends Sprite {
 		_prevFrame = Lib.getTimer();
 
 		CardsManager.instance.SetupPiles(_hand, _reserve, _discard, _board);
+		GoalsManager.instance.SetupPiles(_mission, _goalsReserve, _goalsDiscard);
 	}
 
 	private function enterFrame(e:Event) {
@@ -62,6 +91,10 @@ class Main extends Sprite {
 		_reserve.update(_deltaTime);
 		_discard.update(_deltaTime);
 		_board.update(_deltaTime);
+
+		_mission.update(_deltaTime);
+		_goalsReserve.update(_deltaTime);
+		_goalsDiscard.update(_deltaTime);
 	}
 
 	private function keyDown(e:KeyboardEvent) {
@@ -70,8 +103,8 @@ class Main extends Sprite {
 		if (e.keyCode == 68) {
 			CardsManager.instance.Draw();
 		}
-		if (e.keyCode == 82) {
-			CardsManager.instance.Shuffle();
+		if (e.keyCode == 71) {
+			GoalsManager.instance.Draw();
 		}
 	}
 }

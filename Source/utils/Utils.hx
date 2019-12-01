@@ -22,6 +22,8 @@ class Utils {
     public static inline var CARD_HEIGHT = 150;
     public static inline var HAND_SIZE = 5;
     public static inline var HAND_SPACING = 20;
+    public static inline var MISSION_SIZE = 3;
+    public static inline var MISSION_SPACING = 30;
 
     public static function Lerp(a:Float, b:Float, t:Float) {
         return a + (b - a) * t;

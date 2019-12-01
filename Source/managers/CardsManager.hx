@@ -13,14 +13,14 @@ class CardsManager {
 	public var board:Array<Card> = [];
 
 	private var _hand:Hand;
-	private var _reserve:Reserve;
-	private var _discard:Discard;
+	private var _reserve:Pile;
+	private var _discard:Pile;
 	private var _board:Board;
 
 	private function new() {}
 
 	/// Setup piles references
-	public function SetupPiles(hand:Hand, reserve:Reserve, discard:Discard, board:Board) {
+	public function SetupPiles(hand:Hand, reserve:Pile, discard:Pile, board:Board) {
 		this._hand = hand;
 		this._reserve = reserve;
 		this._discard = discard;
@@ -28,7 +28,7 @@ class CardsManager {
 
 		// DEBUG - fill reserve pile
 		for (i in 0...20) {
-			this.reserve.push(new Card(Random.int(0, 2)));
+			this.reserve.push(new Card(Random.int(0, 1)));
 			this._reserve.addChild(this.reserve[i]);
 		}
 
@@ -65,7 +65,7 @@ class CardsManager {
 
 	/// Shuffles the reserve pile of the player
 	public function Shuffle() {
-		hand = Random.shuffle(hand);
+		reserve = Random.shuffle(reserve);
 	}
 
 	/// Draw an entire handful of cards

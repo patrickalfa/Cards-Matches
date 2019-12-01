@@ -13,7 +13,7 @@ class Card extends Draggable {
 
 		this._type = type;
 
-		graphics.beginFill(Utils.PALETTE[type + 1]);
+		graphics.beginFill(Utils.PALETTE[type + 2]);
 		graphics.drawRect(-50, -75, 100, 150);
 		graphics.endFill();
 

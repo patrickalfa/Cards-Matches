@@ -20,6 +20,10 @@ class Card extends Draggable {
 		addEventListener(MouseEvent.RIGHT_CLICK, rightClick);
 	}
 
+	public function GetType():Int{
+		return _type;
+	}
+
 	public function GetState():CARD_STATE {
 		if (CardsManager.instance.hand.indexOf(this) > -1)
 			return CARD_STATE.HAND;

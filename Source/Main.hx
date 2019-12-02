@@ -61,7 +61,7 @@ class Main extends Sprite {
 		_goalsReserve.x = -200;
 		_goalsReserve.y = stage.stageHeight / 2 - 100;
 
-		_goalsDiscard = new Pile(cast(GoalsManager.instance.reserve));
+		_goalsDiscard = new Pile(cast(GoalsManager.instance.discard));
 		_goalsDiscard.x = stage.stageWidth + 200;
 		_goalsDiscard.y = stage.stageHeight / 2 - 100;
 
@@ -100,11 +100,26 @@ class Main extends Sprite {
 	private function keyDown(e:KeyboardEvent) {
 		trace("keyDown: " + e.keyCode);
 
-		if (e.keyCode == 68) {
-			CardsManager.instance.Draw();
-		}
-		if (e.keyCode == 71) {
-			GoalsManager.instance.Draw();
+		// DEBUG
+		if (e.keyCode == 84) {
+			var board = CardsManager.instance.board;
+			var goalsMatched = [];
+
+			for (goal in GoalsManager.instance.mission) {
+				if (goal.CheckMatch(board)) {
+					trace("MATCH");
+					goalsMatched.push(goal);
+				} else {
+					trace("NOT MATCH");
+				}
+			}
+
+			CardsManager.instance.ClearBoard();
+			for (goal in goalsMatched)
+				GoalsManager.instance.Discard(goal);
+			
+			CardsManager.instance.DrawHand();
+			GoalsManager.instance.DrawMission();
 		}
 	}
 }

@@ -25,7 +25,7 @@ class Utils {
     public static inline var MISSION_SIZE = 3;
     public static inline var MISSION_SPACING = 30;
 
-    public static function Lerp(a:Float, b:Float, t:Float) {
+    public static function Lerp(a:Float, b:Float, t:Float):Float {
         return a + (b - a) * t;
     }
 

@@ -38,6 +38,9 @@ class CardsManager {
 
 	/// Draws a card from the reserve pile to the hand of the player
 	public function Draw() {
+		if (hand.length >= Utils.HAND_SIZE)
+			return;
+
 		if (reserve.length == 0) {
 			RefillReserve();
 			Shuffle();
@@ -118,5 +121,20 @@ class CardsManager {
 
 		hand.push(card);
 		_hand.addChild(card);
+	}
+
+	/// Clear the entire board
+	public function ClearBoard() {
+		for (i in 0...board.length) {
+			if (board[i] != null) {
+				var card = board[i];
+				board[i] = null;
+
+				Utils.LocalToLocal(card, _board, _discard);
+
+				discard.push(card);
+				_discard.addChild(card);
+			}
+		}
 	}
 }

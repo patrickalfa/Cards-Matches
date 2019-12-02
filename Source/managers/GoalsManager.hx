@@ -25,7 +25,7 @@ class GoalsManager {
 
 		// DEBUG - fill reserve pile
 		for (i in 0...10) {
-			this.reserve.push(new Goal());
+			this.reserve.push(new GoalSequence(2));
 		 	this._reserve.addChild(this.reserve[i]);
 		}
 	}

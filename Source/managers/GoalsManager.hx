@@ -25,7 +25,7 @@ class GoalsManager {
 
 		// DEBUG - fill reserve pile
 		for (i in 0...10) {
-			this.reserve.push(new GoalSequence(2));
+			this.reserve.push(new GoalSequence(Random.int(2,3)));
 		 	this._reserve.addChild(this.reserve[i]);
 		}
 	}
@@ -76,12 +76,12 @@ class GoalsManager {
 
 	/// Refills the reserve pile
 	public function RefillReserve() {
-		reserve = discard;
-		discard = [];
+		while (discard.length > 0) {
+			var goal = discard.shift();
 
-		for (goal in reserve) {
 			Utils.LocalToLocal(goal, _discard, _reserve);
 
+			reserve.push(goal);
 			_reserve.addChild(goal);
 		}
 	}

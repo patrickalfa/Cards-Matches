@@ -85,12 +85,12 @@ class CardsManager {
 
 	/// Refills the reserve pile
 	public function RefillReserve() {
-		reserve = discard;
-		discard = [];
+		while (discard.length > 0) {
+			var card = discard.shift();
 
-		for (card in reserve) {
 			Utils.LocalToLocal(card, _discard, _reserve);
 
+			reserve.push(card);
 			_reserve.addChild(card);
 		}
 	}

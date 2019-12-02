@@ -58,12 +58,12 @@ class Main extends Sprite {
 		_mission.y = stage.stageHeight / 2 - 100;
 
 		_goalsReserve = new Pile(cast(GoalsManager.instance.reserve));
-		_goalsReserve.x = -200;
-		_goalsReserve.y = stage.stageHeight / 2 - 100;
+		_goalsReserve.x = stage.stageWidth / 2;
+		_goalsReserve.y = -200;
 
 		_goalsDiscard = new Pile(cast(GoalsManager.instance.discard));
-		_goalsDiscard.x = stage.stageWidth + 200;
-		_goalsDiscard.y = stage.stageHeight / 2 - 100;
+		_goalsDiscard.x = stage.stageWidth / 2;
+		_goalsDiscard.y = -200;
 
 		addChild(_goalsReserve);
 		addChild(_goalsDiscard);

@@ -13,8 +13,14 @@ class Card extends Draggable {
 
 		this._type = type;
 
-		graphics.beginFill(Utils.PALETTE[type + 2]);
+		// BG
+		graphics.beginFill(Utils.PALETTE[2]);
 		graphics.drawRect(-50, -75, 100, 150);
+
+		// Type
+		graphics.beginFill(Utils.PALETTE[type + 4]);
+		graphics.drawRect(-40, -65, 80, 100);
+		
 		graphics.endFill();
 
 		addEventListener(MouseEvent.RIGHT_CLICK, rightClick);

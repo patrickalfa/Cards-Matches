@@ -121,5 +121,10 @@ class Main extends Sprite {
 			CardsManager.instance.DrawHand();
 			GoalsManager.instance.DrawMission();
 		}
+		if (e.keyCode == 82) {
+			var handSize = CardsManager.instance.hand.length;
+			CardsManager.instance.DiscardHand();
+			CardsManager.instance.DrawHand(handSize);
+		}
 	}
 }

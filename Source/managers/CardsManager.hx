@@ -28,7 +28,7 @@ class CardsManager {
 
 		// DEBUG - fill reserve pile
 		for (i in 0...20) {
-			this.reserve.push(new Card(Random.int(0, 1)));
+			this.reserve.push(new Card(Random.int(0, 3)));
 			this._reserve.addChild(this.reserve[i]);
 		}
 
@@ -72,8 +72,8 @@ class CardsManager {
 	}
 
 	/// Draw an entire handful of cards
-	public function DrawHand() {
-		while (hand.length < Utils.HAND_SIZE)
+	public function DrawHand(amount:Int = Utils.HAND_SIZE) {
+		while (hand.length < amount)
 			Draw();
 	}
 

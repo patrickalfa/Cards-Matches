@@ -10,14 +10,20 @@ class GoalSequence extends Goal {
 	public function new(length:Int) {
 		super();
 
-		_sequence = [for(i in 0...length) Random.int(0, 1)];
+		_sequence = [for(i in 0...length) Random.int(0, 3)];
 
-		var dist = 60;
+		// BG
+		graphics.beginFill(Utils.PALETTE[2]);
+		graphics.drawRect(-25 * length - 5, 30, 50 * length + 10, 60);
+
+		var dist = 50;
 		for (i in 0...length) {
 			var newX = (dist * length * .5) - (dist * (length - i - .5));
-			
-			graphics.beginFill(Utils.PALETTE[_sequence[i] + 2]);
-			graphics.drawRect(newX - 25, 0, 50, 75);
+
+			// Type
+			graphics.beginFill(Utils.PALETTE[_sequence[i] + 4]);
+			graphics.drawRect(newX - 20, 40, 40, 40);
+
 			graphics.endFill();
 		}
 	}

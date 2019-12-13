@@ -15,7 +15,13 @@ class Utils {
         0xffa372,   //#ffa372
         0xed6663,   //#ed6663
         0xb52b65,   //#b52b65
-        0x621055    //#621055
+        0x621055,   //#621055
+        
+        /// CARDS ///
+        0xc3f584,   //#c3f584
+        0xfff3af,   //#fff3af
+        0xffd271,   //#ffd271
+        0xf65c78    //#f65c78
     ];
 
     public static inline var CARD_WIDTH = 100;
